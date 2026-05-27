@@ -7,7 +7,7 @@ if(isset($_SESSION['user_id'])) {
 include __DIR__ . '/config/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: login.html');
+    header('Location: login.php');
     exit;
 }
 
@@ -15,7 +15,7 @@ $email = trim($_POST['email'] ?? '');
 $password = $_POST['passwd'] ?? '';
 
 if (!$email || !$password) {
-    echo "<script>alert('Por favor complete todos los campos.'); window.location.href='login.html';</script>";
+    echo "<script>alert('Por favor complete todos los campos.'); window.location.href='login.php';</script>";
     exit;
 }
 
@@ -34,10 +34,10 @@ if (pg_num_rows($res_login) > 0) {
     $_SESSION['user_id'] = $row['id'];
     $_SESSION['user_email'] = $row['email'];
     $_SESSION['user_name'] = $row['full_name'];
-    header('Location: index.html');
+    header('Location: index.php');
     exit;
 }
 
-echo "<script>alert('Correo o contraseña inválidos.'); window.location.href='login.html';</script>";
+echo "<script>alert('Correo o contraseña inválidos.'); window.location.href='login.php';</script>";
 exit;
 ?>
